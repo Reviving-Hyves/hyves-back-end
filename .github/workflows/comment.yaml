@@ -1,0 +1,22 @@
+name: Comment
+run-name: "${{ github.actor }} ran ${{ github.workflow }} on ${{ github.ref_name }}"
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - "src/comment/**"
+  pull_request:
+    branches:
+      - main
+      - development
+    paths:
+      - "src/comment/**"
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: github.base_ref != 'main'
+    steps:
+      - name: Build docker image
+        run: |
+          docker build -t 'ghcr.io/${{ github.repository }}/account' -f src/account/Dockerfile .
