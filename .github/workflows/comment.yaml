@@ -19,4 +19,4 @@ jobs:
     steps:
       - name: Build docker image
         run: |
-          docker build -t 'ghcr.io/${{ github.repository }}/comment' -f src/comment/Dockerfile .
+          docker build -t 'ghcr.io/hyves-back-end/comment' -f src/comment/Dockerfile .
