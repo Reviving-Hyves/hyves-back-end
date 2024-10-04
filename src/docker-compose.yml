@@ -1,0 +1,22 @@
+version: '3'
+services:
+  comment_service:
+    build:
+      context: ./comment
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+
+  # post_service:
+  #   build:
+  #     context: ./post
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8002:8000"
+
+  # profile_service:
+  #   build:
+  #     context: ./profile
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8003:8000"
