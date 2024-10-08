@@ -6,5 +6,17 @@ Python version 3.12
 Django version 4.2
 Django REST framework version 3.15.2
 
+## Usage
+To start a microservice in de /src folder, run the following command
+```bash
+cd src/[microservice]
+python manage.py runserver
+```
+To build with docker and run the container, run the following command
+```bash
+cd src/
+docker-compose up --build
+```
+
 ---
 ```By Nick Welles```
