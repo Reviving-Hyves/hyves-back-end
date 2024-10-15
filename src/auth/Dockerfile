@@ -6,7 +6,7 @@ COPY . /app
 
 RUN pip install --no-cache-dir django djangorestframework djangorestframework-simplejwt
 
-EXPOSE 8002
+EXPOSE 8000
 
 # Run the application:
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
