@@ -44,5 +44,5 @@ def comment_by_post_id(request, post_id):
 
 # List all comments
 class CommentList(generics.ListAPIView):
-    queryset = Comments.objects.all() 
+    queryset = Comments.objects.all()
     serializer_class = CommentSerializer  
