@@ -7,5 +7,4 @@ urlpatterns = [
     path('comment/<int:post_id>/comments/', comment_by_post_id, name='comment_by_post_id'),
     path('comment/create/<int:post_id>', create_comment, name='create_comment'),
     path('comment/delete/<int:comment_id>', delete_comment, name='delete_comment'),
-
 ]

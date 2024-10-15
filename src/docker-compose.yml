@@ -7,6 +7,13 @@ services:
     ports:
       - "8001:8000"
 
+  auth_service:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"
+
   # post_service:
   #   build:
   #     context: ./post
