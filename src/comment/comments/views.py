@@ -20,7 +20,7 @@ def create_comment(request, post_id):
             return Response({'post_id': post_id, **serializer.data}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-   
+
 # Delete comment 
 @api_view(['DELETE'])
 def delete_comment(request, comment_id):

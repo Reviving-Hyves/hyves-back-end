@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -31,7 +32,6 @@ def get_account_info(request):
     user = request.user
     
     try:
-        user = User.objects.get(pk=user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except User.DoesNotExist:
@@ -71,6 +71,9 @@ def update_account(request):
     try:
         user.save()
         return Response({"message": "Account updated successfully"}, status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response({"error": e}, status=status.HTTP_400_BAD_REQUEST)
-    
+    except IntegrityError:
+        return Response({"error": "Username already exists"}, status=status.HTTP_400_BAD_REQUEST)
+    except ValidationError as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception:
+        return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
