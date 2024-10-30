@@ -20,6 +20,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set environment variables for Auth microservice
+        env:
+          SECRET_KEY: ${{ secrets.AUTH_SECRET_KEY }}
+          DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
+          DATABASE_NAME: ${{ secrets.POST_DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.POST_DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.POST_DATABASE_PASSWORD }}
+          DATABASE_HOST: ${{ secrets.AUTH_DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.AUTH_DATABASE_PORT }}
+
+          CELERY_BROKER_URL: ${{ secrets.POST_CELERY_BROKER_URL }}
+          CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
+          DATABASE_URL: ${{ secrets.AUTH_DATABASE_URL }}
+
+          POSTGRES_USER: ${{ secrets.POST_POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POST_POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.AUTH_POSTGRES_DB }}
+        run: echo "Environment variables set for Auth microservice"
+
       - name: Build docker image
         run: |
           docker build -t 'ghcr.io/reviving-hyves/hyves-back-end/auth' -f src/auth/Dockerfile .

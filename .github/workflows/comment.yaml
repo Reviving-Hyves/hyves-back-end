@@ -20,7 +20,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set environment variables for Post microservice
+      - name: Set environment variables for Comment microservice
         env:
           SECRET_KEY: ${{ secrets.COMMENT_SECRET_KEY }}
           DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
@@ -37,7 +37,7 @@ jobs:
           POSTGRES_USER: ${{ secrets.POST_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POST_POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.COMMENT_POSTGRES_DB }}
-        run: echo "Environment variables set for Post microservice"
+        run: echo "Environment variables set for Comment microservice"
 
       - name: Build docker image
         run: |
