@@ -1,25 +1,105 @@
 version: '3'
 services:
-  comment_service:
+
+  # Comment service
+  comment:
+    container_name: comment
     build:
       context: ./comment
       dockerfile: Dockerfile
     ports:
       - "8001:8000"
+    env_file:
+      - ./comment/comment_service/.env
+    depends_on:
+      - rabbitmq
+      - comment_db
+    networks:
+      - hyves_network
 
-  auth_service:
+  comment_db:
+    container_name: comment_db
+    image: postgres:13
+    env_file:
+      - ./comment/comment_service/.env
+    ports:
+      - "5434:5432"
+    networks:
+      - hyves_network
+
+  # Auth service
+  auth:
+    container_name: auth
     build:
       context: ./auth
       dockerfile: Dockerfile
     ports:
       - "8002:8000"
+    env_file:
+      - ./auth/auth_service/.env
+    depends_on:
+      - rabbitmq
+      - auth_db
+    networks:
+      - hyves_network
 
-  # post_service:
-  #   build:
-  #     context: ./post
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8002:8000"
+  auth_db:
+    container_name: auth_db
+    image: postgres:13
+    env_file:
+      - ./auth/auth_service/.env
+    ports:
+      - "5433:5432"
+    networks:
+      - hyves_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"       # RabbitMQ port for communication
+      - "15672:15672"     # RabbitMQ management UI
+    networks:
+      - hyves_network
+
+  comment_worker:
+    build:
+      context: ./comment
+      dockerfile: Dockerfile
+    command: celery -A comments worker -l info
+    depends_on:
+      - rabbitmq
+    networks:
+      - hyves_network
+
+  # Post service
+  post:
+    container_name: post
+    build:
+      context: ./post
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8000"
+    env_file:
+      - ./post/post_service/.env
+    depends_on:
+      - rabbitmq
+      - post_db
+    networks:
+      - hyves_network
+
+  post_db:
+    container_name: post_db
+    image: postgres:13
+    env_file:
+      - ./post/post_service/.env
+    ports:
+      - "5435:5432"
+    networks:
+      - hyves_network
+
+networks:
+  hyves_network:
+    driver: bridge
 
   # profile_service:
   #   build:
