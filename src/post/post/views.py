@@ -10,18 +10,16 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
 @api_view(['POST'])
-def create_post(request, post_id):
+def create_post(request):
     if not request.data:
         return Response({'error': 'No data provided.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    # Add the `post_id` to the request data
-    data = request.data.copy()  # Copy to avoid modifying the original data
-    data['post_id'] = post_id
+    data = request.data.copy()
     serializer = PostSerializer(data=data)
 
     if serializer.is_valid():
         serializer.save()
-        return Response({'post_id': post_id, **serializer.data}, status=status.HTTP_201_CREATED)
+        return Response({**serializer.data}, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

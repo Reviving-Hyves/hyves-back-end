@@ -1,0 +1,35 @@
+name: Post
+run-name: "${{ github.actor }} ran ${{ github.workflow }} on ${{ github.ref_name }}"
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - "src/post/**"
+  pull_request:
+    branches:
+      - main
+      - development
+    paths:
+      - "src/post/**"
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    if: github.base_ref != 'main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: |
+          docker build -t 'ghcr.io/reviving-hyves/hyves-back-end/post' -f src/post/Dockerfile .
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
+  
+      - name: Push Docker Image
+        run: docker push ghcr.io/reviving-hyves/hyves-back-end/post
