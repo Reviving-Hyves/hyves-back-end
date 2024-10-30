@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'post_service.wsgi.application'
 #     }
 # }
 
+# Docker database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

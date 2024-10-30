@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install --no-cache-dir -r django djangorestframework celery django-celery-results requests
+RUN pip install --no-cache-dir django djangorestframework celery django-celery-results requests
 
 EXPOSE 8000
 
