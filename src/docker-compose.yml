@@ -1,5 +1,7 @@
 version: '3'
 services:
+
+  # Comment service
   comment:
     container_name: comment
     build:
@@ -7,16 +9,25 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8001:8000"
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-      - CELERY_RESULT_BACKEND=rpc://
-      - DATABASE_URL=postgres://usr:pswd@db:5433/comment_db
+    env_file:
+      - ./comment/comment_service/.env
     depends_on:
       - rabbitmq
       - comment_db
     networks:
       - hyves_network
 
+  comment_db:
+    container_name: comment_db
+    image: postgres:13
+    env_file:
+      - ./comment/comment_service/.env
+    ports:
+      - "5434:5432"
+    networks:
+      - hyves_network
+
+  # Auth service
   auth:
     container_name: auth
     build:
@@ -24,13 +35,21 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8002:8000"
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-      - CELERY_RESULT_BACKEND=rpc://
-      - DATABASE_URL=postgres://usr:pswd@db:5434/auth_db
+    env_file:
+      - ./auth/auth_service/.env
     depends_on:
       - rabbitmq
       - auth_db
+    networks:
+      - hyves_network
+
+  auth_db:
+    container_name: auth_db
+    image: postgres:13
+    env_file:
+      - ./auth/auth_service/.env
+    ports:
+      - "5433:5432"
     networks:
       - hyves_network
 
@@ -39,30 +58,6 @@ services:
     ports:
       - "5672:5672"       # RabbitMQ port for communication
       - "15672:15672"     # RabbitMQ management UI
-    networks:
-      - hyves_network
-
-  auth_db:
-    container_name: auth_db
-    image: postgres:13
-    environment:
-      POSTGRES_USER: usr
-      POSTGRES_PASSWORD: pswd
-      POSTGRES_DB: auth_db
-    ports:
-      - "5433:5432"
-    networks:
-      - hyves_network
-
-  comment_db:
-    container_name: comment_db
-    image: postgres:13
-    environment:
-      POSTGRES_USER: usr
-      POSTGRES_PASSWORD: pswd
-      POSTGRES_DB: comment_db
-    ports:
-      - "5434:5432"
     networks:
       - hyves_network
 
@@ -76,6 +71,7 @@ services:
     networks:
       - hyves_network
 
+  # Post service
   post:
     container_name: post
     build:
@@ -83,10 +79,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8003:8000"
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-      - CELERY_RESULT_BACKEND=rpc://
-      - DATABASE_URL=postgres://usr:pswd@db:5435/post_db
+    env_file:
+      - ./post/post_service/.env
     depends_on:
       - rabbitmq
       - post_db
@@ -96,10 +90,8 @@ services:
   post_db:
     container_name: post_db
     image: postgres:13
-    environment:
-      POSTGRES_USER: usr
-      POSTGRES_PASSWORD: pswd
-      POSTGRES_DB: post_db
+    env_file:
+      - ./post/post_service/.env
     ports:
       - "5435:5432"
     networks:

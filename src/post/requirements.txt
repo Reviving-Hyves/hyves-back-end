@@ -1,6 +1,0 @@
-django 
-djangorestframework
-celery
-django-celery-results
-requests
-psycopg2-binary>=2.9.0

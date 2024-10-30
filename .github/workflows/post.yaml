@@ -20,6 +20,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set environment variables for Post microservice
+        env:
+          SECRET_KEY: ${{ secrets.POST_SECRET_KEY }}
+          DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
+          DATABASE_NAME: ${{ secrets.POST_DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.POST_DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.POST_DATABASE_PASSWORD }}
+          DATABASE_HOST: ${{ secrets.POST_DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.POST_DATABASE_PORT }}
+
+          CELERY_BROKER_URL: ${{ secrets.POST_CELERY_BROKER_URL }}
+          CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
+          DATABASE_URL: ${{ secrets.POST_DATABASE_URL }}
+
+          POSTGRES_USER: ${{ secrets.POST_POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POST_POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POST_POSTGRES_DB }}
+        run: echo "Environment variables set for Post microservice"
+
       - name: Build docker image
         run: |
           docker build -t 'ghcr.io/reviving-hyves/hyves-back-end/post' -f src/post/Dockerfile .
