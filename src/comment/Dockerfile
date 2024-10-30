@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install --no-cache-dir django djangorestframework
+RUN pip install --no-cache-dir django djangorestframework celery django-celery-results requests psycopg2-binary django-environ
 
 EXPOSE 8000
 
