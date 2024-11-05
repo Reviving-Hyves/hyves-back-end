@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Post
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from .serializers import PostSerializer
 
@@ -33,3 +34,13 @@ def delete_post(request, post_id):
     if request.method == 'DELETE':
         post.delete()
         return Response(status=status.HTTP_200_OK)
+    
+@api_view(['GET'])
+def list_posts(request):
+    posts = Post.objects.all().order_by('-created_at')
+    paginator = PageNumberPagination()
+    paginator.page_size = 30
+    
+    result_page = paginator.paginate_queryset(posts, request)
+    serializer = PostSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
