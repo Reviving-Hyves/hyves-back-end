@@ -90,8 +90,6 @@ def validate_token(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    logging.info(f"Validating token: {token}")
-
     try:
         access_token = AccessToken(token)
 
