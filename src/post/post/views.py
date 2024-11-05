@@ -37,6 +37,13 @@ def delete_post(request, post_id):
     
 @api_view(['GET'])
 def list_posts(request):
+    user_data = getattr(request, 'user_data', None)
+    if not user_data:
+        return Response(
+            {"error": "User authentication failed"}, 
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+        
     posts = Post.objects.all().order_by('-created_at')
     paginator = PageNumberPagination()
     paginator.page_size = 30
