@@ -97,6 +97,16 @@ services:
     networks:
       - hyves_network
 
+  post_worker:
+    build:
+      context: ./post
+      dockerfile: Dockerfile
+    command: celery -A post worker -l info
+    depends_on:
+      - rabbitmq
+    networks:
+      - hyves_network
+
 networks:
   hyves_network:
     driver: bridge
