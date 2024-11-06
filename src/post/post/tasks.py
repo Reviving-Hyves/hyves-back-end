@@ -2,7 +2,7 @@ from celery import shared_task
 import requests
 import logging
 
-AUTH_SERVICE_URL = "http://auth:8000/api/auth/token/validate/"
+AUTH_SERVICE_URL = "http://localhost:8002/api/auth/token/validate/"
 
 @shared_task
 def verify_token(token):

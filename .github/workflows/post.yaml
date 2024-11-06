@@ -22,6 +22,8 @@ jobs:
 
       - name: Set environment variables for Post microservice
         env:
+          DJANGO_ENV: production
+
           SECRET_KEY: ${{ secrets.POST_SECRET_KEY }}
           DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
           DATABASE_NAME: ${{ secrets.POST_DATABASE_NAME }}
