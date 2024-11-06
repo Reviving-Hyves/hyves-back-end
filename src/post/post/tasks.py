@@ -1,8 +1,13 @@
 from celery import shared_task
 import requests
 import logging
+import environ
 
-AUTH_SERVICE_URL = "http://localhost:8002/api/auth/token/validate/"
+env = environ.Env()
+
+env.read_env(env.str('DJANGO_ENV', '.env.development')) 
+
+AUTH_SERVICE_URL = env.str('AUTH_SERVICE_URL', 'http://localhost:8002/api/auth/token/validate/')
 
 @shared_task
 def verify_token(token):
