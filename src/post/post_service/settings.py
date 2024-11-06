@@ -12,16 +12,30 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 import environ
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 # Initialize environ
 env = environ.Env()
 
-# Read the .env file based on environment
-env_file = '.env.development' if os.environ.get('DJANGO_ENV') == 'development' else '.env.production'
-environ.Env.read_env(env_file)
+# Get environment setting
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
-# Use environment variables in your settings
-DEBUG = env.bool("DEBUG", default=False)
+# Debug print
+print(f"Loading environment from: {env_file}")
+
+# Read env file if exists
+if os.path.exists(env_file):
+    environ.Env.read_env(env_file)
+    print("Environment file loaded successfully")
+    print(f"environment={env.str('DJANGO_ENV')}")
+else:
+    print(f"Warning: Environment file {env_file} not found!")
+
+# Use environment variables with defaults
+DEBUG = env.bool("DEBUG")
 SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*'] 
@@ -85,12 +99,12 @@ WSGI_APPLICATION = 'post_service.wsgi.application'
 # Docker database
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_ENGINE'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'ENGINE': env.str('DATABASE_ENGINE'),
+        'NAME': env.str('DATABASE_NAME'),
+        'USER': env.str('DATABASE_USER'),
+        'PASSWORD': env.str('DATABASE_PASSWORD'),
+        'HOST': env.str('DATABASE_HOST'),
+        'PORT': env.str('DATABASE_PORT'),
     }
 }
 
@@ -136,5 +150,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery settings
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env.str('CELERY_RESULT_BACKEND')
