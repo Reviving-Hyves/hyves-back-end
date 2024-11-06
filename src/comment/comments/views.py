@@ -4,23 +4,25 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Comments
 from .serializers import CommentSerializer
+from .decorators import require_authentication
 
 @api_view(['POST'])
+@require_authentication
 def create_comment(request, post_id):
-    user_data = getattr(request, 'user_data', None)
-    if not user_data:
+    if not request.data:
         return Response(
-            {"error": "User authentication failed"}, 
-            status=status.HTTP_401_UNAUTHORIZED
+            {'error': 'No data provided.'}, 
+            status=status.HTTP_400_BAD_REQUEST
         )
-
+        
     comment_data = {
         **request.data,
         'post_id': post_id,
-        'user_id': user_data.get('user_id')
+        'user_id': request.user_id
     }
 
     serializer = CommentSerializer(data=comment_data)
+    
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -29,6 +31,7 @@ def create_comment(request, post_id):
 
 # Delete comment 
 @api_view(['DELETE'])
+@require_authentication
 def delete_comment(request, comment_id):
     try:
         comment = Comments.objects.get(pk=comment_id)
@@ -42,13 +45,12 @@ def delete_comment(request, comment_id):
 # Get comments by post_id
 @api_view(['GET'])
 def comment_by_post_id(request, post_id):
-    user_data = getattr(request, 'user_data', None)
-    if not user_data:
+    if not post_id:
         return Response(
-            {"error": "User authentication failed"}, 
-            status=status.HTTP_401_UNAUTHORIZED
+            {'error': 'Post id not provided.'}, 
+            status=status.HTTP_400_BAD_REQUEST
         )
-        
+    
     comments = Comments.objects.filter(post_id=post_id)
     
     if not comments.exists():
