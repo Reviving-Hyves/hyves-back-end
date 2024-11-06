@@ -39,6 +39,9 @@ jobs:
           POSTGRES_USER: ${{ secrets.POST_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POST_POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POST_POSTGRES_DB }}
+
+          DEBUG: 'False'
+          AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
         run: echo "Environment variables set for Post microservice"
 
       - name: Build docker image
