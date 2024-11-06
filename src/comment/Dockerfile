@@ -1,5 +1,7 @@
 FROM python:3.9
 
+ENV DJANGO_ENV=production
+
 WORKDIR /app
 
 COPY . /app
