@@ -10,8 +10,13 @@ Django REST framework version 3.15.2
 To start a microservice in de /src folder, run the following command
 ```bash
 cd src/[microservice]
-python manage.py runserver
+python manage.py runserver 0.0.0.0:[port]
 ```
+The lists of ports per microservice:
+- 8001: comment
+- 8002: auth
+- 8003: post
+
 To build with docker and run the container, run the following command
 ```bash
 cd src/

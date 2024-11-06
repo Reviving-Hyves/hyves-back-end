@@ -22,6 +22,8 @@ jobs:
 
       - name: Set environment variables for Post microservice
         env:
+          DJANGO_ENV: production
+
           SECRET_KEY: ${{ secrets.POST_SECRET_KEY }}
           DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
           DATABASE_NAME: ${{ secrets.POST_DATABASE_NAME }}
@@ -37,6 +39,9 @@ jobs:
           POSTGRES_USER: ${{ secrets.POST_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POST_POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POST_POSTGRES_DB }}
+
+          DEBUG: 'False'
+          AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
         run: echo "Environment variables set for Post microservice"
 
       - name: Build docker image

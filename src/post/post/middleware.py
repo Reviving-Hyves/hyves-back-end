@@ -30,6 +30,6 @@ class TokenAuthMiddleware:
         if not verified_data or not verified_data.get('valid'):
             logging.error(f"Token validation failed: {verified_data}")
             return JsonResponse({'error': 'Invalid or expired token'}, status=401)
-
+        
         request.user_data = verified_data
         return self.get_response(request)
