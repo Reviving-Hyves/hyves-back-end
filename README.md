@@ -17,10 +17,16 @@ The lists of ports per microservice:
 - 8002: auth
 - 8003: post
 
+To start a celery worker (for RabbitMQ) in de /src folder, run the following command
+```bash
+cd src/[microservice]
+celery -A [microservice] worker -l info 
+```
+
 To build with docker and run the container, run the following command
 ```bash
 cd src/
-docker-compose up --build
+docker compose up --build
 ```
 
 ---
