@@ -10,24 +10,33 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
+# Initialize environ
 env = environ.Env()
-environ.Env.read_env()
 
+# Get environment setting
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# Debug print
+print(f"Loading environment from: {env_file}")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+# Read env file if exists
+if os.path.exists(env_file):
+    environ.Env.read_env(env_file)
+    print("Environment file loaded successfully")
+    print(f"environment={env.str('DJANGO_ENV')}")
+else:
+    print(f"Warning: Environment file {env_file} not found!")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Use environment variables with defaults
+DEBUG = env.bool("DEBUG")
+SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*'] 
 
@@ -53,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'post.middleware.TokenAuthMiddleware',
 ]
 
 ROOT_URLCONF = 'post_service.urls'
@@ -89,12 +99,12 @@ WSGI_APPLICATION = 'post_service.wsgi.application'
 # Docker database
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_ENGINE'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'ENGINE': env.str('DATABASE_ENGINE'),
+        'NAME': env.str('DATABASE_NAME'),
+        'USER': env.str('DATABASE_USER'),
+        'PASSWORD': env.str('DATABASE_PASSWORD'),
+        'HOST': env.str('DATABASE_HOST'),
+        'PORT': env.str('DATABASE_PORT'),
     }
 }
 
@@ -138,3 +148,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery settings
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env.str('CELERY_RESULT_BACKEND')

@@ -1,3 +1,4 @@
+import logging
 from django.db import IntegrityError
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -6,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import AccessToken
 from .serializers import UserSerializer, MyTokenObtainPairSerializer
 
 # Register new users
@@ -77,3 +79,28 @@ def update_account(request):
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     except Exception:
         return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+def validate_token(request):
+    token = request.data.get('token')
+    
+    if not token:
+        return Response(
+            {"valid": False, "error": "Token is required"}, 
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        access_token = AccessToken(token)
+
+        return Response({
+            "valid": True,
+            "user_id": access_token.payload.get('user_id'),
+            "exp": access_token.payload.get('exp'),
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        logging.error(f"Token validation error: {str(e)}")
+        return Response({
+            "valid": False, 
+            "error": str(e)
+        }, status=status.HTTP_401_UNAUTHORIZED)
