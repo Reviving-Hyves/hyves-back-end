@@ -22,6 +22,12 @@ To start a celery worker (for RabbitMQ) in de /src folder, run the following com
 cd src/[microservice]
 celery -A [microservice] worker -l info 
 ```
+To start a k6 Grafana load test, run the following command
+```bash
+cd src/[microservice]/tests
+k6 run --out [output type | csv, json, ?] load_test.js
+```
+
 
 To build with docker and run the container, run the following command
 ```bash
