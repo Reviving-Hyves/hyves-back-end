@@ -53,7 +53,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pytest-django psycopg2-binary
+          pip install django django djangorestframework celery django-celery-results requests psycopg2-binary django-environ pytest-django sentry-sdk
 
       - name: Make migrations
         run: python src/post/manage.py makemigrations
