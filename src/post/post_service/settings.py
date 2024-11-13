@@ -38,7 +38,7 @@ else:
     print(f"Warning: Environment file {env_file} not found!")
 
 # Use environment variables with defaults
-DEBUG = env.bool("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*'] 
