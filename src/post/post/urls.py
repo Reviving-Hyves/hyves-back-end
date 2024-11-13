@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import create_post, delete_post, list_posts, trigger_error
+from .views import create_post, delete_post, list_posts
 
 urlpatterns = [
     path('post/create/', create_post, name='create_post'),

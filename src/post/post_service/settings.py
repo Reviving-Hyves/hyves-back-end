@@ -19,17 +19,13 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Initialize environ
 env = environ.Env()
 
-# Get environment setting
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
-# Debug print
 print(f"Loading environment from: {env_file}")
 
-# Read env file if exists
 if os.path.exists(env_file):
     environ.Env.read_env(env_file)
     print("Environment file loaded successfully")
@@ -37,12 +33,10 @@ if os.path.exists(env_file):
 else:
     print(f"Warning: Environment file {env_file} not found!")
 
-# Use environment variables with defaults
-DEBUG = env.bool("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*'] 
-
 
 # Application definition
 
@@ -88,18 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'post_service.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Docker database
 DATABASES = {
     'default': {
         'ENGINE': env.str('DATABASE_ENGINE'),
