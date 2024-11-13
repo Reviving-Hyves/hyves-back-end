@@ -19,17 +19,13 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Initialize environ
 env = environ.Env()
 
-# Get environment setting
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
-# Debug print
 print(f"Loading environment from: {env_file}")
 
-# Read env file if exists
 if os.path.exists(env_file):
     environ.Env.read_env(env_file)
     print("Environment file loaded successfully")

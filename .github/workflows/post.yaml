@@ -48,6 +48,7 @@ jobs:
           CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
           DEBUG: false
           AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
+          SENTRY_DSN: ''
         run: echo "Environment variables set for Post microservice"
 
       - name: Install dependencies
@@ -70,6 +71,7 @@ jobs:
           CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
           DEBUG: false
           AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
+          SENTRY_DSN: ''
 
       - name: Run migrations
         run: python src/post/manage.py migrate
@@ -86,6 +88,7 @@ jobs:
           CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
           DEBUG: false
           AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
+          SENTRY_DSN: ''
 
       - name: Run tests
         run: pytest src/post/post_service/tests
@@ -102,6 +105,7 @@ jobs:
           CELERY_RESULT_BACKEND: ${{ secrets.POST_CELERY_RESULT_BACKEND }}
           DEBUG: false
           AUTH_SERVICE_URL: ${{ secrets.AUTH_SERVICE_URL }}
+          SENTRY_DSN: ''
 
       - name: Build docker image
         run: |
