@@ -91,7 +91,7 @@ jobs:
           SENTRY_DSN: ''
 
       - name: Run tests
-        run: pytest src/post/post_service/tests
+        run: pytest src/post/tests
         env:
           DJANGO_ENV: production
           SECRET_KEY: ${{ secrets.POST_SECRET_KEY }}
@@ -111,16 +111,16 @@ jobs:
         run: |
           docker build -t 'ghcr.io/reviving-hyves/hyves-back-end/post' -f src/post/Dockerfile .
 
-      - name: Run tests in Docker container
-        run: |
-          docker build -t test-post-service -f src/post/Dockerfile .
-          docker run --rm \
-            -e DATABASE_HOST=127.0.0.1 \
-            -e DATABASE_PORT=5432 \
-            -e DATABASE_USER=${{ secrets.POST_DATABASE_USER }} \
-            -e DATABASE_PASSWORD=${{ secrets.POST_DATABASE_PASSWORD }} \
-            -e DATABASE_NAME=${{ secrets.POST_DATABASE_NAME }} \
-            test-post-service pytest post_service/tests
+      # - name: Run tests in Docker container
+      #   run: |
+      #     docker build -t test-post-service -f src/post/Dockerfile .
+      #     docker run --rm \
+      #       -e DATABASE_HOST=127.0.0.1 \
+      #       -e DATABASE_PORT=5432 \
+      #       -e DATABASE_USER=${{ secrets.POST_DATABASE_USER }} \
+      #       -e DATABASE_PASSWORD=${{ secrets.POST_DATABASE_PASSWORD }} \
+      #       -e DATABASE_NAME=${{ secrets.POST_DATABASE_NAME }} \
+      #       test-post-service pytest tests
         
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v1
