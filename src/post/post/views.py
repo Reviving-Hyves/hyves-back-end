@@ -49,7 +49,3 @@ def list_posts(request) -> Response:
     result_page = paginator.paginate_queryset(posts, request)
     serializer = PostSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
-
-
-def trigger_error(request):
-    division_by_zero = 1 / 0
