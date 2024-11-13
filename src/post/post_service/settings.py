@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import environ
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -152,3 +155,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery settings
 CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = env.str('CELERY_RESULT_BACKEND')
+
+# Sentry
+sentry_sdk.init(
+    dsn=env.str('SENTRY_DSN'),
+    integrations=[
+        DjangoIntegration(),
+        LoggingIntegration(level=None, event_level="ERROR"),
+    ],
+    traces_sample_rate=1.0,
+    send_default_pii=True,
+    _experiments={
+        # Set continuous_profiling_auto_start to True
+        # to automatically start the profiler on when
+        # possible.
+        "continuous_profiling_auto_start": True,
+    },
+)
