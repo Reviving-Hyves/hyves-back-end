@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent
 env = environ.Env()
 
 # Get environment setting
-DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+DJANGO_ENV = os.environ.get('DJANGO_ENV')
 env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
 # Debug print
