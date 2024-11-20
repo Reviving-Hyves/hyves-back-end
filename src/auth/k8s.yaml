@@ -204,6 +204,11 @@ spec:
                 secretKeyRef:
                   name: debug
                   key: DEBUG
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry-dsn
+                  key: SENTRY_DSN
       securityContext:
         seccompProfile:
           type: RuntimeDefault
