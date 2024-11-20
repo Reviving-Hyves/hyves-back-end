@@ -190,9 +190,15 @@ spec:
                   name: postgres-db
                   key: POSTGRES_DB
             - name: DJANGO_ENV
-              value: production
+              valueFrom:
+                secretKeyRef:
+                  name: django-env
+                  key: DJANGO_ENV
             - name: DEBUG
-              value: "False"
+              valueFrom:
+                secretKeyRef:
+                  name: debug
+                  key: DEBUG
       securityContext:
         seccompProfile:
           type: RuntimeDefault
