@@ -23,6 +23,7 @@ jobs:
       - name: Set environment variables for Auth microservice
         env:
           DJANGO_ENV: production
+          PROD_HOST: ${{ secrets.AUTH_PROD_HOST }}
           
           SECRET_KEY: ${{ secrets.AUTH_SECRET_KEY }}
           DATABASE_ENGINE: ${{ secrets.POST_DATABASE_ENGINE }}
