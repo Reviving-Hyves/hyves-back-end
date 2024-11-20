@@ -13,20 +13,19 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import environ
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Initialize environ
 env = environ.Env()
 
-# Get environment setting
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 env_file = os.path.join(BASE_DIR, f'.env.{DJANGO_ENV}')
 
-# Debug print
 print(f"Loading environment from: {env_file}")
 
-# Read env file if exists
 if os.path.exists(env_file):
     environ.Env.read_env(env_file)
     print("Environment file loaded successfully")
@@ -34,12 +33,10 @@ if os.path.exists(env_file):
 else:
     print(f"Warning: Environment file {env_file} not found!")
 
-# Use environment variables with defaults
-DEBUG = env.bool("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env.str("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*'] 
-
 
 # Application definition
 
@@ -85,18 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'post_service.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Docker database
 DATABASES = {
     'default': {
         'ENGINE': env.str('DATABASE_ENGINE'),
@@ -152,3 +137,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery settings
 CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = env.str('CELERY_RESULT_BACKEND')
+
+# Sentry
+sentry_sdk.init(
+    dsn=env.str('SENTRY_DSN'),
+    integrations=[
+        DjangoIntegration(),
+        LoggingIntegration(level=None, event_level="ERROR"),
+    ],
+    traces_sample_rate=1.0,
+    send_default_pii=True,
+    _experiments={
+        # Set continuous_profiling_auto_start to True
+        # to automatically start the profiler on when
+        # possible.
+        "continuous_profiling_auto_start": True,
+    },
+)
