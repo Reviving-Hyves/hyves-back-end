@@ -39,7 +39,9 @@ else:
 DEBUG = env.bool("DEBUG")
 SECRET_KEY = env.str("SECRET_KEY")
 
-ALLOWED_HOSTS = ['auth', 'localhost', '127.0.0.1', '0.0.0.0', '34.88.89.237']
+ALLOWED_HOSTS = ['auth', 'localhost', '127.0.0.1', '0.0.0.0']
+if env.str('PROD_HOST', default=''):
+    ALLOWED_HOSTS.append(env.str('PROD_HOST'))
 
 # AUTH
 
