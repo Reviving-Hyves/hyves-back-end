@@ -209,6 +209,11 @@ spec:
                 secretKeyRef:
                   name: sentry-dsn
                   key: SENTRY_DSN
+            - name: F_PROD_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: f-prod-host
+                  key: F_PROD_HOST
       securityContext:
         seccompProfile:
           type: RuntimeDefault
