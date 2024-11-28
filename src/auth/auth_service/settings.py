@@ -95,7 +95,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 if env.str('F_PROD_HOST', default=''):
-    CORS_ALLOWED_ORIGINS.append(env.str('F_PROD_HOST'))
+    CORS_ALLOWED_ORIGINS.append('http://' + env.str('F_PROD_HOST'))
 
 ROOT_URLCONF = 'auth_service.urls'
 
