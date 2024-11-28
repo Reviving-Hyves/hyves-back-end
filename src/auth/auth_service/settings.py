@@ -42,9 +42,12 @@ else:
 DEBUG = env.bool("DEBUG")
 SECRET_KEY = env.str("SECRET_KEY")
 
-ALLOWED_HOSTS = ['auth', 'localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['auth', 'localhost', '127.0.0.1', '0.0.0.0', 'localhost:3000']
 if env.str('PROD_HOST', default=''):
     ALLOWED_HOSTS.append(env.str('PROD_HOST'))
+
+if env.str('F_PROD_HOST', default=''):
+    ALLOWED_HOSTS.append(env.str('F_PROD_HOST'))
 
 # AUTH
 
@@ -72,6 +75,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'accounts',
 ]
 
@@ -83,7 +87,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+if env.str('F_PROD_HOST', default=''):
+    CORS_ALLOWED_ORIGINS.append(env.str('F_PROD_HOST'))
 
 ROOT_URLCONF = 'auth_service.urls'
 
