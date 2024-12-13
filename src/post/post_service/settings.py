@@ -36,7 +36,9 @@ else:
 DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env.str("SECRET_KEY")
 
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['post', 'localhost']
+if env.str('PROD_HOST', default=''):
+    ALLOWED_HOSTS.append(env.str('PROD_HOST')) 
 
 # Application definition
 
