@@ -3,9 +3,8 @@ kind: Deployment
 metadata:
   annotations:
     autopilot.gke.io/resource-adjustment: '{"input":{"containers":[{"name":"post-1"}]},"output":{"containers":[{"limits":{"ephemeral-storage":"1Gi"},"requests":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"2Gi"},"name":"post-1"}]},"modified":true}'
-    autopilot.gke.io/warden-version: 3.0.42
+    autopilot.gke.io/warden-version: 3.0.41
     deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2024-12-13T09:06:52Z"
   generation: 1
   labels:
     app: post-service
@@ -154,7 +153,6 @@ metadata:
               f:terminationGracePeriodSeconds: {}
       manager: unknown
       operation: Update
-      time: "2024-12-13T09:06:52Z"
     - apiVersion: apps/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -187,11 +185,8 @@ metadata:
       manager: kube-controller-manager
       operation: Update
       subresource: status
-      time: "2024-12-13T09:06:53Z"
   name: post-service
   namespace: default
-  resourceVersion: "32084698"
-  uid: 0d480350-afdd-4d3a-bf90-63dc2ee5e175
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
