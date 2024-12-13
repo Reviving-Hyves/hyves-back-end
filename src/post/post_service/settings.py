@@ -70,7 +70,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-if env.str('F_PROD_HOST', default=''):
+if env.str('PROD_HOST', default=''):
     CORS_ALLOWED_ORIGINS.append('http://' + env.str('PROD_HOST'))
 
 ROOT_URLCONF = 'post_service.urls'
