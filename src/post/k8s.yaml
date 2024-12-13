@@ -10,184 +10,184 @@ metadata:
   labels:
     app: post-service
   managedFields:
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:labels:
-          .: {}
-          f:app: {}
-      f:spec:
-        f:progressDeadlineSeconds: {}
-        f:replicas: {}
-        f:revisionHistoryLimit: {}
-        f:selector: {}
-        f:strategy:
-          f:rollingUpdate:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
             .: {}
-            f:maxSurge: {}
-            f:maxUnavailable: {}
-          f:type: {}
-        f:template:
-          f:metadata:
-            f:labels:
+            f:app: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
               .: {}
-              f:app: {}
-          f:spec:
-            f:containers:
-              k:{"name":"post-1"}:
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
                 .: {}
-                f:env:
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"post-1"}:
                   .: {}
-                  k:{"name":"AUTH_SERVICE_URL"}:
+                  f:env:
                     .: {}
-                    f:name: {}
-                    f:valueFrom:
+                    k:{"name":"AUTH_SERVICE_URL"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"CELERY_BROKER_URL"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"CELERY_BROKER_URL"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"CELERY_RESULT_BACKEND"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"CELERY_RESULT_BACKEND"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_ENGINE"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_ENGINE"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_HOST"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_HOST"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_NAME"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_NAME"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_PASSWORD"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_PASSWORD"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_PORT"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_PORT"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_URL"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_URL"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DATABASE_USER"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DATABASE_USER"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DEBUG"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DEBUG"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"DJANGO_ENV"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"DJANGO_ENV"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"POSTGRES_DB"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"POSTGRES_DB"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"POSTGRES_PASSWORD"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"POSTGRES_PASSWORD"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"POSTGRES_USER"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"POSTGRES_USER"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"SECRET_KEY"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"SECRET_KEY"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                  k:{"name":"SENTRY_DSN"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"SENTRY_DSN"}:
                       .: {}
-                      f:configMapKeyRef: {}
-                f:image: {}
-                f:imagePullPolicy: {}
-                f:name: {}
-                f:resources: {}
-                f:terminationMessagePath: {}
-                f:terminationMessagePolicy: {}
-            f:dnsPolicy: {}
-            f:restartPolicy: {}
-            f:schedulerName: {}
-            f:securityContext: {}
-            f:terminationGracePeriodSeconds: {}
-    manager: unknown
-    operation: Update
-    time: "2024-12-13T09:06:52Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:deployment.kubernetes.io/revision: {}
-      f:status:
-        f:conditions:
-          .: {}
-          k:{"type":"Available"}:
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:configMapKeyRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+      manager: unknown
+      operation: Update
+      time: "2024-12-13T09:06:52Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:conditions:
             .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Progressing"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-        f:observedGeneration: {}
-        f:replicas: {}
-        f:unavailableReplicas: {}
-        f:updatedReplicas: {}
-    manager: kube-controller-manager
-    operation: Update
-    subresource: status
-    time: "2024-12-13T09:06:53Z"
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:replicas: {}
+          f:unavailableReplicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: "2024-12-13T09:06:53Z"
   name: post-service
   namespace: default
   resourceVersion: "32084698"
@@ -211,108 +211,108 @@ spec:
         app: post-service
     spec:
       containers:
-      - env:
-        - name: SECRET_KEY
-          valueFrom:
-            configMapKeyRef:
-              key: SECRET_KEY
-              name: post-service-config-hqmr
-        - name: DATABASE_ENGINE
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_ENGINE
-              name: post-service-config-hqmr
-        - name: DATABASE_NAME
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_NAME
-              name: post-service-config-hqmr
-        - name: DATABASE_USER
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_USER
-              name: post-service-config-hqmr
-        - name: DATABASE_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_PASSWORD
-              name: post-service-config-hqmr
-        - name: DATABASE_HOST
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_HOST
-              name: post-service-config-hqmr
-        - name: DATABASE_PORT
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_PORT
-              name: post-service-config-hqmr
-        - name: CELERY_BROKER_URL
-          valueFrom:
-            configMapKeyRef:
-              key: CELERY_BROKER_URL
-              name: post-service-config-hqmr
-        - name: CELERY_RESULT_BACKEND
-          valueFrom:
-            configMapKeyRef:
-              key: CELERY_RESULT_BACKEND
-              name: post-service-config-hqmr
-        - name: DATABASE_URL
-          valueFrom:
-            configMapKeyRef:
-              key: DATABASE_URL
-              name: post-service-config-hqmr
-        - name: POSTGRES_USER
-          valueFrom:
-            configMapKeyRef:
-              key: POSTGRES_USER
-              name: post-service-config-hqmr
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: POSTGRES_PASSWORD
-              name: post-service-config-hqmr
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              key: POSTGRES_DB
-              name: post-service-config-hqmr
-        - name: DEBUG
-          valueFrom:
-            configMapKeyRef:
-              key: DEBUG
-              name: post-service-config-hqmr
-        - name: AUTH_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              key: AUTH_SERVICE_URL
-              name: post-service-config-hqmr
-        - name: DJANGO_ENV
-          valueFrom:
-            configMapKeyRef:
-              key: DJANGO_ENV
-              name: post-service-config-hqmr
-        - name: SENTRY_DSN
-          valueFrom:
-            configMapKeyRef:
-              key: SENTRY_DSN
-              name: post-service-config-hqmr
-        image: gcr.io/quiet-capsule-441812-n6/github.com/reviving-hyves/hyves-back-end/post
-        imagePullPolicy: Always
-        name: post-1
-        resources:
-          limits:
-            ephemeral-storage: 1Gi
-          requests:
-            cpu: 500m
-            ephemeral-storage: 1Gi
-            memory: 2Gi
-        securityContext:
-          capabilities:
-            drop:
-            - NET_RAW
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - env:
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: SECRET_KEY
+                  name: post-service-config-hqmr
+            - name: DATABASE_ENGINE
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_ENGINE
+                  name: post-service-config-hqmr
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_NAME
+                  name: post-service-config-hqmr
+            - name: DATABASE_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_USER
+                  name: post-service-config-hqmr
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_PASSWORD
+                  name: post-service-config-hqmr
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_HOST
+                  name: post-service-config-hqmr
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_PORT
+                  name: post-service-config-hqmr
+            - name: CELERY_BROKER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: CELERY_BROKER_URL
+                  name: post-service-config-hqmr
+            - name: CELERY_RESULT_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: CELERY_RESULT_BACKEND
+                  name: post-service-config-hqmr
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_URL
+                  name: post-service-config-hqmr
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_USER
+                  name: post-service-config-hqmr
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: post-service-config-hqmr
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_DB
+                  name: post-service-config-hqmr
+            - name: DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  key: DEBUG
+                  name: post-service-config-hqmr
+            - name: AUTH_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTH_SERVICE_URL
+                  name: post-service-config-hqmr
+            - name: DJANGO_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: DJANGO_ENV
+                  name: post-service-config-hqmr
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  key: SENTRY_DSN
+                  name: post-service-config-hqmr
+          image: gcr.io/quiet-capsule-441812-n6/github.com/reviving-hyves/hyves-back-end/post
+          imagePullPolicy: Always
+          name: post-1
+          resources:
+            limits:
+              ephemeral-storage: 1Gi
+            requests:
+              cpu: 500m
+              ephemeral-storage: 1Gi
+              memory: 2Gi
+          securityContext:
+            capabilities:
+              drop:
+                - NET_RAW
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -321,7 +321,7 @@ spec:
           type: RuntimeDefault
       terminationGracePeriodSeconds: 30
       tolerations:
-      - effect: NoSchedule
-        key: kubernetes.io/arch
-        operator: Equal
-        value: amd64
+        - effect: NoSchedule
+          key: kubernetes.io/arch
+          operator: Equal
+          value: amd64
