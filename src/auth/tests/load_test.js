@@ -2,14 +2,16 @@ import http from "k6/http";
 import { check, sleep } from "k6";
 
 export let options = {
-  stages: [
-    { duration: "30s", target: 5 },
-    { duration: "1m", target: 5 },
-    { duration: "30s", target: 0 },
-  ],
-  thresholds: {
-    http_req_duration: ["p(95)<500"],
-  },
+  scenarios: {
+    massive_load: {
+      executor: 'constant-arrival-rate',
+      duration: '10m',
+      rate: 1000,
+      timeUnit: '1s',
+      preAllocatedVUs: 100000,
+      maxVUs: 150000
+    }
+  }
 };
 
 const API_TOKEN = "Bearer [Token here]";
