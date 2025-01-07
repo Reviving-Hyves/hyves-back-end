@@ -11,7 +11,10 @@ export let options = {
       preAllocatedVUs: 100000,
       maxVUs: 150000
     }
-  }
+  },
+  thresholds: {
+    http_req_duration: ["p(95)<500"],
+  },
 };
 
 const API_TOKEN = "Bearer [Token here]";
