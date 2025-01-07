@@ -58,15 +58,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install django djangorestframework celery django-celery-results requests psycopg2-binary django-environ pytest-django sentry-sdk django-cors-headers
+          pip install django djangorestframework celery django-celery-results requests psycopg2-binary django-environ pytest-django sentry-sdk django-cors-headers bandit
 
       - name: Run Django migrations
         run: |
           python src/post/manage.py makemigrations
           python src/post/manage.py migrate
 
-      - name: Run tests
+      - name: Run unit & integration tests
         run: pytest src/post/tests
+
+      - name: Run Security test/coverage
+        run: bandit -r src/post
 
       - name: Build docker image
         run: |
