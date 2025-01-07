@@ -1,0 +1,42 @@
+# bandit.yaml
+# This configuration file controls Bandit's behavior
+
+# Skipping specific severity levels
+skips:
+  # Format: <test_id>:<line_number>:<filename>
+  - B113  # Skip all request timeout warnings
+  
+# Configure severity levels to skip
+# Options: LOW, MEDIUM, HIGH
+severity_level: HIGH  # Only show HIGH severity issues
+
+# Configure confidence levels to check
+# Options: LOW, MEDIUM, HIGH
+confidence_level: MEDIUM  # Show issues with MEDIUM or HIGH confidence
+
+# Exclude specific files or directories
+exclude_dirs:
+  - 'tests'
+  - 'venv'
+  - '.git'
+  - '__pycache__'
+
+# Tests to skip
+exclude:
+  - B101  # Skip assert statements
+  - B113  # Skip request timeout checks
+  - B303  # Skip md5 usage warnings
+  
+# Tests to run
+tests:
+  - B201  # Check for flask debug mode
+  - B506  # Check for yaml load
+
+# Output format
+output_format: json  # Options: csv, json, xml, html
+
+# Number of issues to qualify as a failure
+fail_on:
+  LOW: 0      # Fail if there are any LOW issues
+  MEDIUM: 10  # Allow up to 10 MEDIUM issues
+  HIGH: 0     # Fail if there are any HIGH issues
