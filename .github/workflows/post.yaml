@@ -69,7 +69,7 @@ jobs:
         run: pytest src/post/tests
 
       - name: Run Security test/coverage
-        run: bandit -r src/post
+        run: bandit -c bandit.yaml -r src/post/
 
       - name: Build docker image
         run: |
