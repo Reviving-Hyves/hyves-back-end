@@ -27,6 +27,10 @@ To start a k6 Grafana load test, run the following command
 cd src/[microservice]/tests
 k6 run --out [output type | csv, json, ?] load_test.js
 ```
+To run the unit and integration test, run the following command
+```bash
+pytest src/[microservice]/tests/
+```
 
 
 To build with docker and run the container, run the following command
